@@ -66,6 +66,17 @@ const server = http.createServer((request, response) => {
       response.write(product);
       response.end();
       break;
+    case "/CSS/style.css":
+      fs.readFile("./public/CSS/style.css", "utf8", (err, data) => {
+        if (err) {
+          res.writeHead(404);
+          res.write("wrong");
+        } else {
+          res.writeHead(200, { "content-type": "text/css" });
+          res.write(data);
+        }
+        res.end();
+      });
     default:
       response.writeHead(404);
       response.write("page not found");
